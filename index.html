@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRUDS</title>
+    <link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+    <div class="crud">
+        <div class="header">
+            <p>product management system</p>
+        </div>
+        <button id="add" onclick="openAddMenu()">Click to Add Products</button>
+        <button id="sell">Click to Sell Products</button>
+        <div id="toBlur">
+            <div class="output">
+                <div class="searchBlock">
+                    <input onkeyup="searchData(this.value)" type="text" id="search" placeholder="Search">
+                    <div class="btnSearch">
+                        <button onclick="searchMood(this.id)" id="searchTitle">Search By Title</button>
+                        <button onclick="searchMood(this.id)" id="searchCategory">Search By Category</button>
+                    </div>
+                </div>
+                <div id="deleteAll"></div>
+                <table>
+                    <tr>
+                        <th>id</th>
+                        <th>title</th>
+                        <th>price</th>
+                        <th>taxes</th>
+                        <th>ads</th>
+                        <th>discount</th>
+                        <th>total</th>
+                        <th>Amount</th>
+                        <th>category</th>
+                        <th>update</th>
+                    </tr>
+                    <tbody id="tbody">
+
+                    </tbody>
+                </table>      
+            </div>
+        </div>
+
+        <div class="input" id="Input">
+            <input placeholder="Title" type="text" id="title">
+            <div class="price">
+                <input onkeyup="getTotal()" type="number" placeholder="Price" id="price">
+                <input onkeyup="getTotal()" type="number" placeholder="Taxes" id="taxes">
+                <input onkeyup="getTotal()" type="number" placeholder="Ads" id="ads">
+                <input onkeyup="getTotal()" type="number" placeholder="Discount" id="discount">
+                <small id="total"></small>   
+            </div>
+            <input placeholder="Count" type="number" id="count">
+            <input placeholder="Category" type="text" id="category">
+            <button id="submit">Create The Product</button>
+            <button id="submit1" onclick="closeAddMenu()">Close</button>
+        </div>
+    </div> 
+    <script src="main.js"></script>
+    
+</body>
+</html>
