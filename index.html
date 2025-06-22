@@ -10,12 +10,15 @@
 <body>
     <div class="crud">
         <div class="header">
+            <button id="toggleMode">Switch Mode</button>
             <p>product management system</p>
         </div>
         <button id="add" onclick="openAddMenu()">Click to Add Products</button>
         <button id="sell" onclick="openSellMenu()">Click to Sell Products</button>
         <div id="toBlur">
-            <div class="output">
+            <button id="showData">Click to Show Products</button>
+            <button id="hideData">Click to Hide Products</button>
+            <div class="output" id="output">
                 <div class="searchBlock">
                     <input onkeyup="searchData(this.value)" type="text" id="search" placeholder="Search">
                     <div class="btnSearch">
@@ -27,7 +30,7 @@
                 <table>
                     <tr>
                         <th>id</th>
-                        <th>title</th>
+                        <th>name</th>
                         <th>price</th>
                         <th>taxes</th>
                         <th>ads</th>
@@ -45,7 +48,7 @@
         </div>
 
         <div class="input" id="Input">
-            <input placeholder="Title" type="text" id="title">
+            <input placeholder="Product Name" type="text" id="title">
             <div class="price">
                 <input onkeyup="getTotal()" type="number" placeholder="Price" id="price">
                 <input onkeyup="getTotal()" type="number" placeholder="Taxes" id="taxes">
@@ -54,26 +57,38 @@
                 <small id="total" class="Total"></small>   
             </div>
             <input placeholder="Count" type="number" id="count">
-            <input placeholder="Category" type="text" id="category">
+            <input placeholder="Product Category" type="text" id="category">
             <button id="submit">Create The Product</button>
             <button id="submit1" onclick="closeAddMenu()">Close</button>
         </div>
 
         <div class="input" id="Sell">
             <div class="title-drop">
-                <input placeholder="Title" type="text" id="titlesell">
+                <input placeholder="Product Name" type="text" id="titlesell">
                 <ul class="drop" id="drop">
 
                 </ul>
-            </div>
+            </div>            
+            <input placeholder="Product Category" type="text" id="categorysell">
             <div class="price">
                 <input placeholder="Count" type="number" id="countsell">
                 <small id="total-sell" class="Total"></small>   
             </div>
-            <input placeholder="Category" type="text" id="categorysell">
             <button id="submitsell" onclick="sold()">Sell The Product</button>
             <button id="submit1sell" onclick="closeSellMenu ()">Close</button>
         </div>
+        <h1 class="toBuy">Do not Forget to buy this Products.</h1>
+         <table>
+            <tr>
+                <th>id</th>
+                <th>name</th>
+                <th>total</th>
+                <th>Amount</th>
+                <th>category</th>
+            </tr>
+            <tbody id="tbody2">
+            </tbody>
+        </table>      
 
     </div> 
     <script src="main.js"></script>

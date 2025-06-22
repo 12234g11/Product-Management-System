@@ -11,7 +11,9 @@ let submit = document.getElementById('submit');
 let addMenu = document.getElementById('Input');
 let sellMenu = document.getElementById('Sell');
 let ToBlur = document.getElementById('toBlur');
-
+let showProduct = document.getElementById('showData');
+let hideData = document.getElementById('hideData');
+let data = document.getElementById('output');
 let mood = 'create';
 let temp;
 let datapro = localStorage.product ? JSON.parse(localStorage.product) : [];
@@ -26,8 +28,15 @@ function getTotal() {
     total.style.background = '#961010';
   }
 }
+showProduct.addEventListener( 'click' , ()=>{
+  data.classList.remove('hide');
+});
+hideData.addEventListener( 'click' , ()=>{
+  data.classList.add('hide');
+});
 
 function openSellMenu() {
+  closeAddMenu();
   sellMenu.style.opacity = '1';
   sellMenu.style.transform = 'translate(-50%, -50%) scale(1)';
   sellMenu.style.zIndex = '5';
@@ -50,6 +59,7 @@ function closeSellMenu() {
 }
 
 function openAddMenu() {
+  closeSellMenu();
   addMenu.style.opacity = '1';
   addMenu.style.transform = 'translate(-50%, -50%) scale(1)';
   addMenu.style.zIndex = '5';
@@ -114,6 +124,7 @@ function showproducts() {
   getTotal();
   let tableRow = '';
   for (let i = 0; i < datapro.length; i++) {
+    let countColor = datapro[i].count <= 3 ? 'style="color: red; font-weight: bold;"' : '';
     tableRow += `
       <tr>
         <td>${i + 1}</td>
@@ -123,20 +134,40 @@ function showproducts() {
         <td>${datapro[i].ads}</td>
         <td>${datapro[i].discount}</td>
         <td>${datapro[i].total}</td>
-        <td>${datapro[i].count}</td>
+        <td ${countColor}>${datapro[i].count}</td>
         <td>${datapro[i].category}</td>
         <td><button onclick="updateData(${i})" id="update">Update</button></td>
-        <td><button onclick="deleteItem(${i})" id="delete">Delete</button></td>
+        <td><button onclick="deleteItem(${i})" id="delete" style="background-color: #b90000; color: white;">Delete</button></td>
       </tr>`;
   }
+
   document.getElementById('tbody').innerHTML = tableRow;
+
   let btndeleateAll = document.getElementById('deleteAll');
   if (datapro.length > 0) {
-    btndeleateAll.innerHTML = `<button onclick="deleteAll()" id="delete">Delete All (${datapro.length})</button>`;
+    btndeleateAll.innerHTML = `<button onclick="deleteAll()" id="delete" style="background-color: #b90000; color: white;">Delete All (${datapro.length})</button>`;
   } else {
     btndeleateAll.innerHTML = '';
   }
+  
+  let tableRow2 = '';
+  for (let i = 0; i < datapro.length; i++) {
+    if(datapro[i].count<4){
+      let countColor = datapro[i].count <= 3 ? 'style="color: red; font-weight: bold;"' : '';
+      tableRow2 += `
+        <tr>
+          <td>${i + 1}</td>
+          <td>${datapro[i].title}</td>
+          <td>${datapro[i].total}</td>
+          <td ${countColor}>${datapro[i].count}</td>
+          <td>${datapro[i].category}</td>
+        </tr>`;
+    }
+
+  }
+  document.getElementById('tbody2').innerHTML = tableRow2;
 }
+
 showproducts();
 
 function deleteItem(i) {
@@ -227,75 +258,108 @@ sellInput.addEventListener('input', (e) => {
     current_object = null;
 
     if (value.length === 0) {
-        drop.classList.remove('active');
-        return;
+      drop.classList.remove('active');
+      return;
     }
 
-    const final_data = datapro.filter(data => {data.title.includes(value)});
+    const final_data = datapro.filter(data => data.title.includes(value));
     const shownTitles = new Set();
 
     if (final_data.length > 0) {
-        drop.classList.add('active');
-        final_data.forEach(d => {
-            if (!shownTitles.has(d.title)) {
-                let li = document.createElement('li');
-                li.innerText = d.title;
-                li.addEventListener('click', () => {
-                    sellInput.value = d.title;
-                    categoryInput.value = d.category;
-                    drop.classList.remove('active');
-                    current_object = d;
-                });
-                drop.appendChild(li);
-                shownTitles.add(d.title);
-            }
-        });
-    }
-    else {
-    let li = document.createElement('li');
-    li.innerText = 'No match found';
-    drop.appendChild(li);
-    drop.classList.add('active');
+      drop.classList.add('active');
+      final_data.forEach(d => {
+        if (!shownTitles.has(d.title)) {
+          let li = document.createElement('li');
+          li.innerText = d.title;
+          li.addEventListener('click', () => {
+            sellInput.value = d.title;
+            categoryInput.value = d.category;
+            drop.classList.remove('active');
+            current_object = d;
+          });
+          drop.appendChild(li);
+          shownTitles.add(d.title);
+        }
+      });
+    } else {
+      let li = document.createElement('li');
+      li.innerText = 'No match found';
+      drop.appendChild(li);
+      drop.classList.add('active');
     }
 });
-
-let ecount = 0;
-let flag = 0;
 
 countInput.addEventListener('input', (e) => {
   let enteredCount = Number(e.target.value);
-  let availableCount = Number(current_object?.count);
+  let availableCount = Number(current_object?.count || 0);
 
-  if (sellInput.value && enteredCount <= availableCount && enteredCount > 0) {
+  totalLapel.innerHTML = '';
+  totalLapel.style.background = '#961010';
+  if (e.target.value.trim() === '') {
+    return;
+  }
+  else if(countInput.value > 0){
     totalLapel.innerHTML = enteredCount * Number(current_object.total);
     totalLapel.style.background = '#040';
-    flag = 1;
     ecount = enteredCount;
-  } else if (!sellInput.value) {
+    flag = 1;
+  }
+
+});
+
+
+
+function sold() {
+  let enteredCount = Number(countInput.value);
+  let availableCount = Number(current_object?.count);
+  if (!sellInput.value) {
     window.alert('Enter the Name of Product First');
-    countInput.value = '';
-  } else if (enteredCount > availableCount) {
-    window.alert('The Maximum Available Amount is ' + availableCount);
-    countInput.value = '';
-    totalLapel.innerHTML = '';
-    totalLapel.style.background = '#961010';
-  } else if (enteredCount <= 0) {
+    return;
+  }
+  if (countInput.value === '') {
+    window.alert('Enter the Amount of Product To sell');
+    return;
+  }
+  if (enteredCount <= 0) {
     window.alert('Enter Amount Greater than 0');
-    countInput.value = '';
+    return;
+  }
+  if (enteredCount > availableCount) {
+    window.alert('The Maximum Available Amount is ' + availableCount);
+    return;
+  }
+  current_object.count -= enteredCount;
+  localStorage.setItem('product', JSON.stringify(datapro));
+  showproducts();
+  sellInput.value = '';
+  categoryInput.value = '';
+  countInput.value = '';
+  totalLapel.innerHTML = '';
+  totalLapel.style.background = '#961010';
+  drop.innerHTML = '';
+}
+
+
+// Dark , light 
+let modeButton = document.getElementById('toggleMode');
+
+modeButton.addEventListener('click', () => {
+  if (document.body.classList.contains('dark-mode')) {
+    document.body.classList.remove('dark-mode');
+    document.body.classList.add('light-mode');
+    modeButton.innerText = 'Switch to Dark Mode';
+    totalLapel.classList.add('total-light');
+    total.classList.add('total-light');
+  } else {
+    document.body.classList.remove('light-mode');
+    document.body.classList.add('dark-mode');
+    modeButton.innerText = 'Switch to Light Mode';
   }
 });
 
-function sold() {
-  if (countInput.value == '') {
-    window.alert('Enter the Amount of Product To sell');
-  }
-  if (flag == 1) {
-    current_object.count -= ecount;
-    showproducts();
-    sellInput.value = '';
-    categoryInput.value = '';
-    countInput.value = '';
-    totalLapel.innerHTML = '';
-    drop.innerHTML = '';
-  }
-}
+// Set default mode on page load
+window.addEventListener('load', () => {
+  document.body.classList.add('dark-mode');
+  data.classList.add('hide');
+  modeButton.innerText = 'Switch to Light Mode';
+});
