@@ -354,6 +354,8 @@ modeButton.addEventListener('click', () => {
     document.body.classList.remove('light-mode');
     document.body.classList.add('dark-mode');
     modeButton.innerText = 'Switch to Light Mode';
+    totalLapel.classList.remove('total-light');
+    total.classList.remove('total-light');
   }
 });
 
