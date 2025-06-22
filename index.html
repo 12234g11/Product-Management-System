@@ -13,7 +13,7 @@
             <p>product management system</p>
         </div>
         <button id="add" onclick="openAddMenu()">Click to Add Products</button>
-        <button id="sell">Click to Sell Products</button>
+        <button id="sell" onclick="openSellMenu()">Click to Sell Products</button>
         <div id="toBlur">
             <div class="output">
                 <div class="searchBlock">
@@ -51,13 +51,30 @@
                 <input onkeyup="getTotal()" type="number" placeholder="Taxes" id="taxes">
                 <input onkeyup="getTotal()" type="number" placeholder="Ads" id="ads">
                 <input onkeyup="getTotal()" type="number" placeholder="Discount" id="discount">
-                <small id="total"></small>   
+                <small id="total" class="Total"></small>   
             </div>
             <input placeholder="Count" type="number" id="count">
             <input placeholder="Category" type="text" id="category">
             <button id="submit">Create The Product</button>
             <button id="submit1" onclick="closeAddMenu()">Close</button>
         </div>
+
+        <div class="input" id="Sell">
+            <div class="title-drop">
+                <input placeholder="Title" type="text" id="titlesell">
+                <ul class="drop" id="drop">
+
+                </ul>
+            </div>
+            <div class="price">
+                <input placeholder="Count" type="number" id="countsell">
+                <small id="total-sell" class="Total"></small>   
+            </div>
+            <input placeholder="Category" type="text" id="categorysell">
+            <button id="submitsell" onclick="sold()">Sell The Product</button>
+            <button id="submit1sell" onclick="closeSellMenu ()">Close</button>
+        </div>
+
     </div> 
     <script src="main.js"></script>
     
