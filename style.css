@@ -93,18 +93,7 @@ input{
     transition: 0.5s;
     z-index: 20;
 }
-/* #search{
-    width: 100%;
-    height: 30px;
-    outline: none;
-    border: none;
-    background-color: #111;
-    margin: 4px 0px;
-    border-radius: 4px;
-    padding: 4px;
-    color: #fff;
-    transition: 0.5s;
-} */
+
 input:focus{
     background-color: #202020;
     transform: scale(1.09);
@@ -113,13 +102,11 @@ input:focus{
     width: 20%;
 }
 .Total{
-    /* display: none; */
     background-color: #961010;
     padding: 5px 2px;
     border-radius: 4px;
 }
 .Total::before{
-    /* display: none; */
     content: 'Total: ';
 }
 #add , #sell{
@@ -224,11 +211,6 @@ th ,th{
     display: none;
 }
 
-/* .output.show{
-    display: block;
-} */
-
-
 @media (max-width: 1037px){
     #add , #sell{
         width: 100%;
@@ -240,5 +222,8 @@ th ,th{
     .responsivetable{
         width: 100%;
         overflow: scroll;
+    }
+    h1{
+        font-size: 26px !important;
     }
 }
