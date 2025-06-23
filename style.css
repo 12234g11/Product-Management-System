@@ -223,6 +223,7 @@ th ,th{
 .output.hide{
     display: none;
 }
+
 /* .output.show{
     display: block;
 } */
@@ -235,5 +236,9 @@ th ,th{
     }
     .input{
         width: 17rem;
+    }
+    .responsivetable{
+        width: 100%;
+        overflow: scroll;
     }
 }
