@@ -1,63 +1,57 @@
+# 🛍️ Product Management System (CRUD + Sell)
 
-🛒 Product Management System (CRUDS + Sell System)
-This is a full-featured Product Management System built with HTML, CSS, and JavaScript, designed to help users manage product inventory efficiently with Create, Read, Update, and Delete (CRUD) operations.
+A complete **product management system** developed using **HTML**, **CSS**, and **JavaScript** — no frameworks or libraries. It lets you create, update, delete, and sell products with real-time UI updates and data persistence via `localStorage`.
 
-✨ Features
-Add / Update Products
-Create new products with detailed info: name, price, taxes, ads, discount, total, count, and category.
+---
 
-Sell Products System
+## 📦 Features
 
-Autocomplete product name while selling.
+### 1. ✅ Product CRUD
+- Add, update, delete products
+- Auto-calculates total price (price + taxes + ads - discount)
+- Supports multiple product entries with count
+- Includes:
+  - Input validation
+  - Dynamic total preview
+  - Highlight low-stock products
 
-Validates available stock before completing the sale.
+### 2. 💰 Sell System
+- Search and select product to sell
+- Autocomplete input for product name
+- Reduces stock count after sale
+- Includes:
+  - Quantity validation
+  - Total price calculation for the sold quantity
+  - Sale confirmation and UI feedback
 
-Automatically updates product count after sale.
+### 3. 🔍 Search & Filter
+- Search by product **title** or **category**
+- Instant filtering as you type
+- Highlights matching results in the table
 
-Calculates total sale value in real-time.
+### 4. 🌗 Dark/Light Mode
+- Toggle between dark and light themes
+- Mode switch button updates label dynamically
+- Styles total label accordingly
 
-Search & Filter
-Search by title or category dynamically as you type.
+### 5. 💾 localStorage Integration
+- All product data is saved in browser localStorage
+- Data persists across page reloads and browser sessions
 
-Show/Hide Product List
-Toggle visibility of product data with a button click.
+---
 
-Stock Alert System
+## 🖥️ Getting Started
 
-Highlights low-stock items (count ≤ 3) in red.
+Just open the `index.html` file in your browser. No setup required.
 
-Separate table view to show only low-stock items with a reminder message.
+---
 
-Dark/Light Mode Toggle
-Switch easily between dark and light themes with a single button.
+## 🧪 Technologies Used
 
-Persistent Data with localStorage
-All product data is stored in browser localStorage so your data stays after refresh or close.
+- HTML5
+- CSS3
+- JavaScript (ES6)
+- localStorage (Browser Storage)
 
-📁 Tech Stack
-HTML5
-
-CSS3
-
-JavaScript (ES6+)
-
-Browser localStorage for saving data
-
-🚀 Getting Started
-To run this project:
-
-Clone the repository.
-
-Open index.html in your browser.
-
-Start adding, viewing, updating, selling, or deleting your products!
-
-git clone https://github.com/yourusername/product-management-system.git
-cd product-management-system
-📌 Notes
-No backend/server is required.
-
-Best viewed on desktop/laptop screens.
-
-All logic is handled purely on the frontend.
+---
 
