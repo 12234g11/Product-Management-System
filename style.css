@@ -171,7 +171,7 @@ table{
 table th{
     text-transform: uppercase;
 }
-th ,th{
+th ,th,td{
     padding: 5px;
 }
 #deleteAll{
